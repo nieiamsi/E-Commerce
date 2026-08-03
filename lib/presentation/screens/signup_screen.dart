@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../data/services/database_service.dart';
+import '../../../data/services/database_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -17,6 +17,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   bool _isLoading = false;
   String? _errorMessage;
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   void _handleSignUp() async {
     if (!_formKey.currentState!.validate()) return;
@@ -42,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           content: Text('Account created successfully! Please log in.'),
         ),
       );
-      Navigator.pop(context); // Return to Login Screen
+      Navigator.pop(context);
     } else {
       setState(() {
         _errorMessage = 'Username already exists. Try another one.';
@@ -77,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   border: OutlineInputBorder(),
                 ),
                 validator: (val) =>
-                    val == null || val.isEmpty ? 'Enter username' : null,
+                    val == null || val.trim().isEmpty ? 'Enter username' : null,
               ),
               const SizedBox(height: 16),
               TextFormField(

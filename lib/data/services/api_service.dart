@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/user_model.dart';
-import 'database_service.dart';
+import 'package:my_ecommerce_app/data/services/database_service.dart';
 import 'storage_service.dart';
 
 class ApiService {
